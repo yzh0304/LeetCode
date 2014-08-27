@@ -65,8 +65,6 @@ public class Search2DMatrix {
 			}
 
 			if (matrix[middle][0] > target) {
-				System.out.println(low);
-				System.out.println(middle);
 				return findSearchWhichRow(matrix, low, middle - 1, target);
 			}
 
