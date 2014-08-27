@@ -1,28 +1,25 @@
 public classEvaluateReversePolishNotation {
 
     public int evalRPN(String[] tokens) {
-		StringBuffer sb = new StringBuffer(16);
-		sb.append('(');
+		
 
 		Stack<Integer> stack = new Stack<Integer>();
 
 		int value = 0;
-		boolean hasLeft = false;
+		
 		int length = tokens.length;
+		// if the input array cotains only one item, just return its only item's valye
 		if(length == 1){
 			return Integer.parseInt(tokens[0]);
 		}
 		for (int i = 0; i < length; i++) {
 			String str = tokens[i];
+			// if one notation appeared，pop two values and evaluate them then push the value into the stack
 			if (str.equals("+") || str.equals("-") || str.equals("*")
 					|| str.equals("/")) {
 				int one = stack.pop();
 				int two = stack.pop();
-				if (!hasLeft) {
-					sb.append('(');
-					hasLeft = true;
-				}
-				sb.append(two).append(str).append(one);
+				
 				if (str.equals("+")) {
 					value = one + two;
 				} else if (str.equals("-")) {
@@ -37,18 +34,12 @@ public classEvaluateReversePolishNotation {
 				
 
 			}else{
+				// if it‘s a value push it into the stack
 				stack.push(Integer.parseInt(str));
 			}
 
 		}
 		
-		if (hasLeft) {
-			sb.append(')').append(')');
-		}else{
-			sb.append(')');
-		}
-		
-		// System.out.println(sb);
 		return value;
 	}
 	
