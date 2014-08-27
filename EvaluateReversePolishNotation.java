@@ -1,4 +1,4 @@
-public classEvaluateReversePolishNotation {
+public class EvaluateReversePolishNotation {
 
     public int evalRPN(String[] tokens) {
 		
@@ -14,9 +14,8 @@ public classEvaluateReversePolishNotation {
 		}
 		for (int i = 0; i < length; i++) {
 			String str = tokens[i];
-			// if one notation appeared，pop two values and evaluate them then push the value into the stack
-			if (str.equals("+") || str.equals("-") || str.equals("*")
-					|| str.equals("/")) {
+			// if one notation appeared，pop two values from the stack and evaluate them then push the evaluated value into the stack
+			if (str.equals("+") || str.equals("-") || str.equals("*") || str.equals("/")) {
 				int one = stack.pop();
 				int two = stack.pop();
 				
