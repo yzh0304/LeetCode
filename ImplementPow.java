@@ -1,3 +1,6 @@
+/** 
+ * Implement pow(x, n) 
+ */
 public class ImplementPow {
 
     public double pow(double x, int n) {
