@@ -58,6 +58,29 @@ public class LengthOfLastWord {
 
 		}
 	}
+	
+	public int lengthOfLastWord2(String s) {
+		int lastLen = 0;
+		int i = s.length() - 1;
+		// 从后往前找到非空格字符和空格字符交界处
+		while (i >= 0 && s.charAt(i) == ' ') {
+			i--;
+		}
+
+		// 从上面的交界处往前寻找到第一个非空字符
+		while (i >= 0 && s.charAt(i) != ' ') {
+			lastLen++;
+			i--;
+		}
+		return lastLen;
+	}
+
+	public int lengthOfLastWord3(String s) {
+		// 使用spilt进行空格分割
+		String[] items = s.split("\\s+");
+		return items.length == 0 ? 0 : items[items.length - 1].length();
+	}
+
 
 	public static void main(String[] args) {
 		String s = "abcdef";
