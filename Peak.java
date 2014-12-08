@@ -48,7 +48,8 @@ public class Peak {
 
 			// 分为四种情况
 			// 情况1 x < y < z 此时循环向后推进 1 步
-			// 情况2 x < y > z 此时满足条件，记下y的下标和y的值，循环向后推进2步(因为要满足条件应该有y<z，这个不满足，所以不需要再继续判断)
+			// 情况2 x < y > z
+			// 此时满足条件，记下y的下标和y的值，循环向后推进2步(因为要满足条件应该有y<z，这个不满足，所以不需要再继续判断)
 			// 情况3 x > y < z 此时循环向后推进1步
 			// 情况4 x > y > z 此时循环向后推进2步
 			if (lower < num[i] && num[i] < higher) {
@@ -70,9 +71,41 @@ public class Peak {
 		return peakElementIndex;
 	}
 
+	public int findPeakElement2(int[] num) {
+		for (int i = 1; i < num.length; i++) {
+			if (num[i] < num[i - 1]) {
+				// 到这里说明有 num[0] < num[1] < ... < num[i-2] < num[i-1]
+				return i - 1;
+			}
+		}
+		return num.length - 1;
+	}
+
+	public int findPeakElement3(int[] num) {
+		int low = 0;
+		int high = num.length - 1;
+
+		while (low < high) {
+			int mid1 = (high - low) / 2 + low;
+			int mid2 = mid1 + 1;
+			// 如对于 1 2 3 4 5 mid1 = 2 mid2 = 3
+			// 满足if的条件，此时若4位置的元素大于3位置元素，那么最后就4位置的元素(最后一个)满足了
+			// 若4位置的元素小于3位置元素，那么最后就是3位置元素满足了。故一定在右边
+			if (num[mid1] < num[mid2]) {
+				low = mid2; // 在右边
+			} else {
+				high = mid1; // 在左边
+			}
+
+		}
+
+		return low;
+
+	}
+
 	public static void main(String[] args) {
-		int[] a = { -2147483648 };
+		int[] a = { 1 };
 		Peak peak = new Peak();
-		System.out.println(peak.findPeakElement(a));
+		System.out.println(peak.findPeakElement3(a));
 	}
 }
